@@ -100,4 +100,7 @@
 <     (for more exactness if you want the carrot since I'm just typing this as text it is):
 <     Find the derivative of: f(x) = (3(x^2)  - 5x)^4
 < 
+< When you look at this, it looks like a mess because there is algebra trapped inside a giant power of 4. To solve it, you use a core calculus tool called the Chain Rule.
+
+Imagine you are looking at this problem on a Calculus 1 exam:\(\text{Find\ the\ derivative\ of:\ }f(x)=(3x^{2}-5x)^{4}\)
 
