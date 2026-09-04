@@ -1,0 +1,26 @@
+> When I was in college we had these were some of the following math classes:
+> Calculus 1 (I guess I'd describe this as introduction to calculus)
+> Calculus 2 (I guess I'd describe this as integration techniques)
+> Calculus 3 (I guess I'd describe this as multivariable)
+> Calculus 4 (differential equations)
+
+< It sounds like your college used a four-semester calculus sequence, which is a common way some universities structure their foundational mathematics curriculum!
+< 
+< While many institutions compress these topics into a three-semester sequence (where differential equations is treated as an entirely separate class),
+< splitting them into four distinct courses allows for a steadier pace. Here is how your experience maps to the standard academic breakdown:
+< 
+< - Calculus 1 (Differential Calculus): Focuses on limits, continuity, and the definition of the derivative.
+<   It teaches you how to find the rate of change of a function.
+<
+< - Calculus 2 (Integral Calculus): Focuses on integration techniques (like integration by parts or partial fractions), areas under curves,
+<   and infinite sequences and series (like Taylor series).
+<
+< - Calculus 3 (Multivariable Calculus): Extends the concepts of derivatives and integrals into three or more dimensions.
+<   You deal with vectors, partial derivatives, and multiple integrals (double and triple integrals).
+<
+< - Calculus 4 (Differential Equations): Focuses on equations that involve functions and their derivatives.
+<   These are heavily used to model real-world systems in physics, engineering, and economics (like population growth or fluid dynamics).
+<
+< Are you reviewing these topics for a specific project, or were you curious about how this sequence compares to other university math programs?
+
+
