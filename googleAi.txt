@@ -74,13 +74,15 @@
 <
 < To give you an idea of the rigor you'll see on these tests, here is an interactive practice set focusing on advanced limits
 < and introductory derivatives-a core component of a real college Calculus 1 final exam.
-
-Calculus 1 Rigorous Practice: Limits and Derivatives
-
-                                 x
-                               xe
-1. Evaluate the limit lim x->0 ----
-                                  x
-                               1-e
-
+< 
+< Calculus 1 Rigorous Practice: Limits and Derivatives
+< 
+<                                  x
+<                                xe
+< 1. Evaluate the limit lim x->0 ----
+<                                   x
+<                                1-e
+< 
 < ...
+
+> I'm not sure I remember anything lol I have no idea what to do for that problem.
