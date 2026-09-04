@@ -57,3 +57,16 @@
 < - Show me a basic example of a differential equation and how to solve it
 < - Help me map out a 4-week study schedule to learn the basics
 
+> I was hoping to find practice exams that have the same rigor as a graded exam a student would take.
+>
+> So I'd start with calculus 1:
+> I find practice exams for every topic.
+> I learn every problem and then print it and "take the test myself" until I get a 100
+>
+> Then I'd go to calculus 2:
+> etc...
+>
+> This way I make sure I remember everything.
+
+
+
