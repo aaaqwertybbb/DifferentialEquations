@@ -86,3 +86,18 @@
 < ...
 
 > I'm not sure I remember anything lol I have no idea what to do for that problem.
+
+< That is completely normal! Seven years is a long time to go without doing limits and derivatives. The fact that you don't recognize it right away doesn't mean you can't learn it—it just means you need to look at a completed example first to wake up that part of your brain.
+<
+< Let's look at one of the exact problems from that quiz and break it down step-by-step so you can see how it works.
+<
+< Let's Break Down a Problem Together
+<
+< Imagine you are looking at this problem on a Calculus 1 exam:
+<                                       2      4
+<     Find the derivative of: f(x) = (3x  - 5x)
+<                                             
+<     (for more exactness if you want the carrot since I'm just typing this as text it is):
+<     Find the derivative of: f(x) = (3(x^2)  - 5x)^4
+< 
+
