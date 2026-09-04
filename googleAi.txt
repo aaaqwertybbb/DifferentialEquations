@@ -23,4 +23,37 @@
 <
 < Are you reviewing these topics for a specific project, or were you curious about how this sequence compares to other university math programs?
 
+> I haven't been in college for 7 years at this point.
+> 
+> But when I was in college, I'd take up to and including 'Calculus 3 (Multivariable Calculus)'
+> 
+> I'd like to learn 'Calculus 4 (Differential Equations)'
+
+< I've made a note of that. Welcome back to the world of mathematics! Jumping back into it after seven years is an exciting challenge,
+< and having Multivariable Calculus under your belt gives you a fantastic foundation.
+< Differential Equations (Calculus 4) is heavily visual and conceptual, making it one of the most rewarding math classes to study independently.
+<
+< Because it has been a while, you don't need to relearn everything, but a quick refresher on a few core tools will make your transition incredibly smooth.
+<
+< Core Prerequisites to Refresh
+<
+< Before diving into Differential Equations, it is highly recommended to spend a few hours re-familiarizing yourself with these specific topics:
+< - Integration Techniques (from Calc 2): You will use Integration by Parts and Partial Fraction Decomposition constantly.
+< - The Chain Rule (from Calc 1): Essential for understanding how derivatives relate to one another when functions are nested.
+< - Basic Linear Algebra (Optional but helpful): Knowing what a matrix and a determinant are will make the later chapters (Systems of Differential Equations) much easier.
+<
+< Recommended Self-Study Strategy
+< 1. Start with First-Order Equations: Begin with Separable Equations and Integrating Factors. These are the most straightforward equations where you can directly apply your Calc 2 integration skills.
+< 2. Move to Second-Order Linear Equations: This is where you learn to model physical systems like pendulums or springs. You will look for "characteristic equations" which turn calculus problems into basic algebra.
+< 3. Explore the Laplace Transform: This is a powerful tool that transforms difficult differential equations into easier algebraic equations to solve.
+<
+< Free Resources for Self-Study
+< - Paul's Online Math Notes: (Search for "Paul's Online Notes Differential Equations"). This is arguably the best, most straightforward written resource on the internet. It includes clear explanations and step-by-step practice problems.
+< - Professor Leonard (YouTube): If you prefer video lectures, his playlist for Differential Equations is legendary. He records his actual university lectures, pacing them perfectly for self-guided learners.
+< - 3Blue1Brown (YouTube): Watch his "Differential Equations" essence series. It provides stunning visual intuitions for what these equations actually represent in the physical world before you get bogged down in the algebra.
+<
+< How would you prefer to kick things off?
+< - Give me a quick diagnostic problem to see what integration techniques I remember
+< - Show me a basic example of a differential equation and how to solve it
+< - Help me map out a 4-week study schedule to learn the basics
 
