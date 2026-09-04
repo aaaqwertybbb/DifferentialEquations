@@ -104,3 +104,34 @@
 
 Imagine you are looking at this problem on a Calculus 1 exam:\(\text{Find\ the\ derivative\ of:\ }f(x)=(3x^{2}-5x)^{4}\)
 
+The Chain Rule is often described as the "Layers of an Onion" rule. You work your way from the outside in:
+
+- Step 1: The Outside Layer. Ignore the math inside the parentheses for a second. If this was just \(X^{4}\), the rule of calculus says you bring the \(4\) to the front and change the power to a \(3\).
+      \(\mathbf{4}(\text{leave\ the\ inside\ alone})^{3}\)
+
+- Step 2: The Inside Layer. Now, you look only at the math that was trapped inside: \(3x^2 - 5x\). You take the derivative of just that piece.
+  The derivative of \(3x^{2}\) is \(6x\), and the derivative of \(-5x\) is \(-5\).
+  \(\text{Inside\ derivative}=\mathbf{(6x-5)}\)
+
+- Step 3: Multiply them together.
+\(f^{\prime }(x)=\mathbf{4}(3x^{2}-5x)^{3}\mathbf{(6x-5)}\)
+
+Once you see it broken down, your brain will start remembering, "Oh right, I bring the power down, keep the inside the same, and then multiply by the derivative of the inside."
+
+How to Start Without Feeling Overwhelmed
+
+Because you want that 100% mastery, starting straight with practice exams right now will feel like running a marathon without stretching.
+
+Since you are starting at Calculus 1, the absolute best way to build your confidence before taking a practice test is to use Paul's Online Math Notes:
+
+1. Go to his site and click on Calculus I.
+2. Start at the very beginning of the Derivatives section.
+3. He gives you a brief, clear explanation of a single concept, followed by 5 to 10 practice problems where the answers are hidden.
+4. Try a problem, click "Show Solution" to see how he did it, and repeat until you can do them on your own.
+
+Once you finish a chapter on his site, then you will be totally ready to print out a practice exam and crush it.
+
+Would you like to try one more simple derivative problem together right now with a hint,
+or would you prefer me to gather the direct links to the best step-by-step beginner study guides for Calculus 1?
+
+
