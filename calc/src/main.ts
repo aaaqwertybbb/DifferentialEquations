@@ -1,8 +1,4 @@
 import './style.css'
-import typescriptLogo from './typescript.svg'
-import viteLogo from '/electron-vite.svg'
-import { setupCounter } from './counter.ts'
-import { setupList } from './list.ts'
 import { ListItem, Contact } from './interface';
 import { VirtualList } from './components/VirtualList.ts'
 
@@ -16,10 +12,6 @@ declare global {
   }
 }
 
-//// 1. Config Variables
-//const ITEM_HEIGHT = 72;   /* Must match the CSS height perfectly */
-//const BUFFER_ITEMS = 5;   /* Extra elements above/below viewport to prevent flickering */
-
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
   <div class="my-custom-layout-sandbox">
     <header class="list-header">
@@ -29,9 +21,6 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
     <ul id="list-container" class="item-list"></ul>
   </div>
 `
-
-//setupCounter(document.querySelector<HTMLButtonElement>('#counter')!)
-//setupList(document.querySelector<HTMLDivElement>('#list_id')!);
 
 // Use contextBridge
 window.ipcRenderer.on('main-process-message', (_event, message) => {
@@ -78,7 +67,7 @@ const taskList = new VirtualList<Contact>({
   renderItem: (contact) => {
     const li = document.createElement('li');
     li.innerHTML = `
-      <span class="status-dot ${contact.isOnline ? 'online' : 'offline'}"></span>
+      <span class="status-dot ${contact.isOnline ? 'online' : 'offline'}">${contact.isOnline ? 'yes' : 'no'}</span>
       <span class="user-email">${contact.email}</span>
     `;
     return li;
