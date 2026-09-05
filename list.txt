@@ -41,7 +41,10 @@ export default defineConfig({
 < - Do you need help setting up a specific feature right now (like window styling, database integration, or calling Node.js APIs)?
 < - Are you encountering any initial errors when running npm start?
 
-
+> I have some knowledge about UI.
+> 
+> But I was interested to see what you'd say if I asked you to:
+> "step by step walk me through how to create a list UI"
 
 
 
