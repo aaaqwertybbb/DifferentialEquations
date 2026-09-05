@@ -2,6 +2,7 @@ import './style.css'
 import typescriptLogo from './typescript.svg'
 import viteLogo from '/electron-vite.svg'
 import { setupCounter } from './counter.ts'
+import { setupList } from './list.ts'
 
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
   <div>
@@ -18,10 +19,13 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
     <p class="read-the-docs">
       Click on the Vite and TypeScript logos to learn more
     </p>
+    <div id="list_id" class="list">
+    </div>
   </div>
 `
 
 setupCounter(document.querySelector<HTMLButtonElement>('#counter')!)
+setupList(document.querySelector<HTMLDivElement>('#list_id')!);
 
 // Use contextBridge
 window.ipcRenderer.on('main-process-message', (_event, message) => {
