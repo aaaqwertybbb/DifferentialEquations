@@ -45,9 +45,22 @@ h1 {
 }
 
 #app {
-  max-width: 1280px;
+  /*max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 2rem;*/
+
+
+/*
+> The question more succinctly is:
+> "is using 'width: 100vw;' a sensible way to have the list UI fill the entire applications viewport?
+
+No, using width: 100vw; is a common pitfall in desktop development because it ignores the native vertical scrollbar.
+
+Since block-level elements (like a div) naturally stretch to fill 100% of their parent container's width,
+the cleanest approach is to use standard percentages or flex behavior.
+*/
+
+  width: 100%;
   text-align: center;
 }
 
