@@ -1,61 +1,61 @@
 > I have a brand new templated electron app. It is templated with vite+typescript.
 
-< Congratulations on spinning up your new app! You are likely using Electron Forge's Vite + TypeScript template or the community-favorite electron-vite tool. Both provide an incredibly fast development environment with Hot Module Replacement (HMR).
-<
-< To give you the most accurate advice or code snippets, how can I help you move forward?
-<
-< If you are looking for inspiration on next steps, here is what developers usually tackle first with a fresh template:
-<
-< 1. Adding a Frontend Framework
-< By default, the template scaffolds a vanilla TypeScript frontend. If you want to use a framework, you will need to install its dependencies and update your vite.renderer.config.ts.
-< - React: npm install react react-dom and add @vitejs/plugin-react.
-< - Vue: npm install vue and add @vitejs/plugin-vue.
-<
-< 2. Setting up Inter-Process Communication (IPC)
-< Electron keeps your UI (Renderer process) isolated from the operating system (Main process) for security. You'll want to set up an IPC bridge in your preload.ts file:
-< ```ts
+Congratulations on spinning up your new app! You are likely using Electron Forge's Vite + TypeScript template or the community-favorite electron-vite tool. Both provide an incredibly fast development environment with Hot Module Replacement (HMR).
+
+To give you the most accurate advice or code snippets, how can I help you move forward?
+
+If you are looking for inspiration on next steps, here is what developers usually tackle first with a fresh template:
+
+1. Adding a Frontend Framework
+By default, the template scaffolds a vanilla TypeScript frontend. If you want to use a framework, you will need to install its dependencies and update your vite.renderer.config.ts.
+- React: npm install react react-dom and add @vitejs/plugin-react.
+- Vue: npm install vue and add @vitejs/plugin-vue.
+
+2. Setting up Inter-Process Communication (IPC)
+Electron keeps your UI (Renderer process) isolated from the operating system (Main process) for security. You'll want to set up an IPC bridge in your preload.ts file:
+```ts
 // src/preload.ts
 import { contextBridge, ipcRenderer } from 'electron';
 
 contextBridge.exposeInMainWorld('electronAPI', {
   sendMessage: (message: string) => ipcRenderer.send('to-main', message)
 });
-< ```
-<
-< 3. Integrating Styling
-< If you want to use Tailwind CSS, you can initialize it normally via npm, but you must ensure your content array in tailwind.config.js points to your renderer files (e.g., ./index.html, ./src/**/*.{js,ts,jsx,tsx}) so it purges properly.
-< 
-< 4. Fixing VS Code Debugging
-< If you try to set breakpoints in VS Code right now, you might notice they don't bind. A common gotcha with the Vite template is needing to manually enable sourcemaps in your config:
-< ```ts
+```
+
+3. Integrating Styling
+If you want to use Tailwind CSS, you can initialize it normally via npm, but you must ensure your content array in tailwind.config.js points to your renderer files (e.g., ./index.html, ./src/**/*.{js,ts,jsx,tsx}) so it purges properly.
+
+4. Fixing VS Code Debugging
+If you try to set breakpoints in VS Code right now, you might notice they don't bind. A common gotcha with the Vite template is needing to manually enable sourcemaps in your config:
+```ts
 // vite.main.config.ts
 export default defineConfig({
   build: {
     sourcemap: true,
   },
 });
-< ```
-< 
-< To tailor the next steps specifically to your project, let me know:
-< - Which frontend framework (React, Vue, Svelte, or Vanilla TS) do you plan to use?
-< - Do you need help setting up a specific feature right now (like window styling, database integration, or calling Node.js APIs)?
-< - Are you encountering any initial errors when running npm start?
+```
 
-> I have some knowledge about UI.
-> 
-> But I was interested to see what you'd say if I asked you to:
-> "step by step walk me through how to create a list UI"
+To tailor the next steps specifically to your project, let me know:
+- Which frontend framework (React, Vue, Svelte, or Vanilla TS) do you plan to use?
+- Do you need help setting up a specific feature right now (like window styling, database integration, or calling Node.js APIs)?
+- Are you encountering any initial errors when running npm start?
 
-< Since you already know your way around UI design, we can skip the basics of layout theory and focus directly on implementation.
-<
-< Building a clean, high-performance list UI in Electron involves a distinct architecture: the Renderer process handles the presentation,
-< the Preload script securely exposes safe native boundaries, and the Main process handles the heavy lifting like file system access or database queries.
-<
-< Here is a step-by-step workflow to build a dynamic list UI in vanilla TypeScript, ensuring proper Electron architecture.
-<
-< Step 1: Define Your Data Structure
-< Create a strict type for your list items. Since you are using TypeScript, define this in a shared or renderer-accessible file.
-< ```ts
+I have some knowledge about UI.
+
+But I was interested to see what you'd say if I asked you to:
+"step by step walk me through how to create a list UI"
+
+Since you already know your way around UI design, we can skip the basics of layout theory and focus directly on implementation.
+
+Building a clean, high-performance list UI in Electron involves a distinct architecture: the Renderer process handles the presentation,
+the Preload script securely exposes safe native boundaries, and the Main process handles the heavy lifting like file system access or database queries.
+
+Here is a step-by-step workflow to build a dynamic list UI in vanilla TypeScript, ensuring proper Electron architecture.
+
+Step 1: Define Your Data Structure
+Create a strict type for your list items. Since you are using TypeScript, define this in a shared or renderer-accessible file.
+```ts
 // src/interface.ts (or inside your renderer folder)
 export interface ListItem {
   id: string;
@@ -63,22 +63,22 @@ export interface ListItem {
   description: string;
   timestamp: number;
 }
-< ```
-< 
-< Step 2: Establish the IPC Bridge (Preload)
-< Electron restricts the UI from accessing Node.js APIs directly for security reasons. Use contextBridge to expose a safe function that fetches your list data.
-< ```ts
+```
+
+Step 2: Establish the IPC Bridge (Preload)
+Electron restricts the UI from accessing Node.js APIs directly for security reasons. Use contextBridge to expose a safe function that fetches your list data.
+```ts
 // src/preload.ts
 import { contextBridge, ipcRenderer } from 'electron';
 
 contextBridge.exposeInMainWorld('api', {
   fetchListItems: (): Promise<ListItem[]> => ipcRenderer.invoke('get-list-items'),
 });
-< ```
-< 
-< Step 3: Handle the Data Fetch (Main Process)
-< In your main process file (usually src/main.ts or src/index.ts), listen for that invoke request and return mock data or database records.
-< ```ts
+```
+
+Step 3: Handle the Data Fetch (Main Process)
+In your main process file (usually src/main.ts or src/index.ts), listen for that invoke request and return mock data or database records.
+```ts
 // src/main.ts
 import { app, BrowserWindow, ipcMain } from 'electron';
 import { ListItem } from './interface';
@@ -92,11 +92,11 @@ ipcMain.handle('get-list-items', async (): Promise<ListItem[]> => {
     { id: '2', title: 'Second Task', description: 'Optimize IPC payloads', timestamp: Date.now() },
   ];
 });
-< ```
-< 
-< Step 4: Write the HTML Shell
-< Open your index.html file and create a clean container where your list items will be injected.
-< ```html
+```
+
+Step 4: Write the HTML Shell
+Open your index.html file and create a clean container where your list items will be injected.
+```html
 <!-- index.html -->
 <!DOCTYPE html>
 <html>
@@ -116,11 +116,11 @@ ipcMain.handle('get-list-items', async (): Promise<ListItem[]> => {
     <script type="module" src="/src/renderer.ts"></script>
   </body>
 </html>
-< ```
-< 
-< Step 5: Build the Render Logic (Renderer Process)
-< In your renderer.ts, declare the TypeScript global interface for your exposed bridge API, fetch the data, and render the elements.
-< ```ts
+```
+
+Step 5: Build the Render Logic (Renderer Process)
+In your renderer.ts, declare the TypeScript global interface for your exposed bridge API, fetch the data, and render the elements.
+```ts
 // src/renderer.ts
 import { ListItem } from './interface';
 
@@ -180,11 +180,11 @@ async function initList() {
 }
 
 initList();
-< ```
-< 
-< Step 6: Basic Desktop Styles
-< Desktop list UIs benefit from fixed positions, hidden overflow behavior to allow independent scrolling, and explicit hover/active states.
-< ```css
+```
+
+Step 6: Basic Desktop Styles
+Desktop list UIs benefit from fixed positions, hidden overflow behavior to allow independent scrolling, and explicit hover/active states.
+```css
 /* src/index.css */
 body {
   margin: 0;
@@ -254,27 +254,27 @@ body {
 .delete-btn:hover {
   background-color: #eba0b3;
 }
-< ```
-< 
-< Would you like to build on top of this by:
-< - Adding virtual scrolling to handle large sets of data smoothly
-< - Implementing drag-and-drop reordering using native HTML5 API
-< - Setting up a live database listener so the list updates automatically when local files change
+```
+
+Would you like to build on top of this by:
+- Adding virtual scrolling to handle large sets of data smoothly
+- Implementing drag-and-drop reordering using native HTML5 API
+- Setting up a live database listener so the list updates automatically when local files change
 
 > I'd like to "Adding virtual scrolling to handle large sets of data smoothly"
-> 
-> Virtual scrolling keeps your Electron app performing at 60 FPS even with 100,000 items.
-> Instead of creating thousands of DOM elements (which hogs memory and causes lag), virtual scrolling renders only the items visible on the screen,
-> plus a tiny buffer.
-> 
-> As the user scrolls, we rapidly reuse or swap the content of those few DOM elements and shift their positions.
-> 
-> Here is how to implement a high-performance fixed-height virtual scroll using your existing vanilla TypeScript setup.
-> 
-> Step 1: Update the CSS Layout
-> We need a structure where an outer container handles the actual scroll bar, and an inner container artificially stretches to the height that the full list would be.
-> 
-> ```css
+
+Virtual scrolling keeps your Electron app performing at 60 FPS even with 100,000 items.
+Instead of creating thousands of DOM elements (which hogs memory and causes lag), virtual scrolling renders only the items visible on the screen,
+plus a tiny buffer.
+
+As the user scrolls, we rapidly reuse or swap the content of those few DOM elements and shift their positions.
+
+Here is how to implement a high-performance fixed-height virtual scroll using your existing vanilla TypeScript setup.
+
+Step 1: Update the CSS Layout
+We need a structure where an outer container handles the actual scroll bar, and an inner container artificially stretches to the height that the full list would be.
+
+```css
 /* src/index.css */
 .item-list {
   position: relative; /* Crucial for absolute positioning of rows */
@@ -307,11 +307,11 @@ body {
   border-bottom: 1px solid #313244;
   height: 72px;       /* Fixed height is required for basic virtual scrolling */
 }
-> ```
-> 
-> Step 2: Implement the Virtual Scroll Engine
-> Replace your src/renderer.ts script with this high-performance rendering loop. It recalculates which items are visible during every scroll event using standard math.
-> ```ts
+```
+
+Step 2: Implement the Virtual Scroll Engine
+Replace your src/renderer.ts script with this high-performance rendering loop. It recalculates which items are visible during every scroll event using standard math.
+```ts
 // src/renderer.ts
 import { ListItem } from './interface';
 
@@ -415,11 +415,11 @@ async function initList() {
 }
 
 initList();
-> ```
-> 
-> Step 3: Test with Massive Datasets (Main Process)
-> To truly feel the power of virtual scrolling, open your src/main.ts and modify your handler to generate tens of thousands of mock items.
-> ```ts
+```
+
+Step 3: Test with Massive Datasets (Main Process)
+To truly feel the power of virtual scrolling, open your src/main.ts and modify your handler to generate tens of thousands of mock items.
+```ts
 // src/main.ts
 ipcMain.handle('get-list-items', async (): Promise<ListItem[]> => {
   const largeDataset: ListItem[] = [];
@@ -435,11 +435,11 @@ ipcMain.handle('get-list-items', async (): Promise<ListItem[]> => {
   
   return largeDataset;
 });
-> ```
-> 
-> When you start up your app now via npm start, scrolling through 50,000 items will be completely instantaneous and consume negligible RAM.
-> 
-> Now that the rendering pipeline is highly optimized, how would you like to build on top of this?
-> - Implement a search filter input at the top that works instantly across all 50,000 rows
-> - Add dynamic height support if your list item descriptions are going to be variable lengths
-> - Expose a context menu (right-click) natively to interact with individual row items
+```
+
+When you start up your app now via npm start, scrolling through 50,000 items will be completely instantaneous and consume negligible RAM.
+
+Now that the rendering pipeline is highly optimized, how would you like to build on top of this?
+- Implement a search filter input at the top that works instantly across all 50,000 rows
+- Add dynamic height support if your list item descriptions are going to be variable lengths
+- Expose a context menu (right-click) natively to interact with individual row items
