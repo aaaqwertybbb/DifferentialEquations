@@ -22,5 +22,6 @@ electron.contextBridge.exposeInMainWorld("ipcRenderer", {
   //fetchListItems: (): Promise<ListItem[]> => ipcRenderer.invoke('get-list-items'),
 });
 electron.contextBridge.exposeInMainWorld("api", {
-  fetchListItems: () => electron.ipcRenderer.invoke("get-list-items")
+  fetchListItems: () => electron.ipcRenderer.invoke("get-list-items"),
+  fetchContacts: () => electron.ipcRenderer.invoke("get-contacts")
 });

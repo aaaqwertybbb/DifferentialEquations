@@ -37,6 +37,16 @@ function createWindow() {
     }
     return largeDataset;
   });
+  ipcMain.handle("get-contacts", async () => {
+    const largeDataset = [];
+    for (let i = 1; i <= 5e4; i++) {
+      largeDataset.push({
+        email: i.toString() + "@email.com",
+        isOnline: i % 2 === 0
+      });
+    }
+    return largeDataset;
+  });
 }
 app.on("window-all-closed", () => {
   if (process.platform !== "darwin") {

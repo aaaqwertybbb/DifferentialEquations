@@ -5,3 +5,8 @@ export interface ListItem {
   description: string;
   timestamp: number;
 }
+
+export interface Contact {
+  email: string;
+  isOnline: boolean;
+}

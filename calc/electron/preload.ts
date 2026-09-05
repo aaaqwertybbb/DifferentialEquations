@@ -27,4 +27,5 @@ contextBridge.exposeInMainWorld('ipcRenderer', {
 
 contextBridge.exposeInMainWorld('api', {
   fetchListItems: (): Promise<ListItem[]> => ipcRenderer.invoke('get-list-items'),
+  fetchContacts: (): Promise<ListItem[]> => ipcRenderer.invoke('get-contacts'),
 });

@@ -3,7 +3,7 @@ import typescriptLogo from './typescript.svg'
 import viteLogo from '/electron-vite.svg'
 import { setupCounter } from './counter.ts'
 import { setupList } from './list.ts'
-import { ListItem } from './interface';
+import { ListItem, Contact } from './interface';
 import { VirtualList } from './components/VirtualList.ts'
 
 // Tell TS that window.api exists from preload
@@ -11,6 +11,7 @@ declare global {
   interface Window {
     api: {
       fetchListItems: () => Promise<ListItem[]>;
+      fetchContacts: () => Promise<Contact[]>;
     };
   }
 }
@@ -39,6 +40,10 @@ window.ipcRenderer.on('main-process-message', (_event, message) => {
 
 const listElement = document.getElementById('list-container') as HTMLUListElement;
 
+// Example A
+// =========
+///*
+let apiToCall: () => Promise<ListItem[]> = window.api.fetchListItems;
 // 1. Define how your task rows should look
 const taskList = new VirtualList<ListItem>({
   container: listElement,
@@ -61,10 +66,29 @@ const taskList = new VirtualList<ListItem>({
     return li;
   }
 });
+//*/
+
+// Example B
+// =========
+/*
+let apiToCall: () => Promise<Contact[]> = window.api.fetchContacts;
+const taskList = new VirtualList<Contact>({
+  container: listElement,
+  itemHeight: 50,
+  renderItem: (contact) => {
+    const li = document.createElement('li');
+    li.innerHTML = `
+      <span class="status-dot ${contact.isOnline ? 'online' : 'offline'}"></span>
+      <span class="user-email">${contact.email}</span>
+    `;
+    return li;
+  }
+});
+*/
 
 // 2. Feed it data whenever you receive it
 async function init() {
-  const items = await window.api.fetchListItems();
+  const items = await apiToCall();
   taskList.updateData(items);
 }
 init();

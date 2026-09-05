@@ -2,7 +2,7 @@ import { app, BrowserWindow, ipcMain } from 'electron'
 import { createRequire } from 'node:module'
 import { fileURLToPath } from 'node:url'
 import path from 'node:path'
-import { ListItem } from '../src/interface';
+import { Contact, ListItem } from '../src/interface';
 
 const require = createRequire(import.meta.url)
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
@@ -56,6 +56,19 @@ function createWindow() {
         title: `Task Assignment #${i}`,
         description: `Automated testing string for virtualized tracking row index ${i}.`,
         timestamp: Date.now()
+      });
+    }
+    
+    return largeDataset;
+  });
+  
+  ipcMain.handle('get-contacts', async (): Promise<Contact[]> => {
+    const largeDataset: Contact[] = [];
+    
+    for (let i = 1; i <= 50000; i++) {
+      largeDataset.push({
+        email: i.toString() + '@email.com',
+        isOnline: i % 2 === 0
       });
     }
     
