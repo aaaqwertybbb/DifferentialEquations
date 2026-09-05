@@ -481,7 +481,7 @@ Now that your scrolling is fully optimized, how would you like to proceed?
 - Implement keyboard navigation (using Up/Down arrows to change the selected item)
 - Style a custom overlay scrollbar that looks seamless on desktop
 
-I'd like to breakout this logic into a "list component" that can accept a list of any kind.
+> I'd like to breakout this logic into a "list component" that can accept a list of any kind.
 
 To break this out into a reusable component that works with any data structure, you can leverage TypeScript Generics <T> along with
 a render callback function. This mimics the design of modular UI components found in modern frameworks, but keeping it in pure vanilla TypeScript.
