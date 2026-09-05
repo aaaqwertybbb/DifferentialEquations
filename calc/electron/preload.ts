@@ -1,4 +1,5 @@
 import { ipcRenderer, contextBridge } from 'electron'
+import { ListItem } from '../src/interface'
 
 // --------- Expose some API to the Renderer process ---------
 contextBridge.exposeInMainWorld('ipcRenderer', {
@@ -21,4 +22,9 @@ contextBridge.exposeInMainWorld('ipcRenderer', {
 
   // You can expose other APTs you need here.
   // ...
+  //fetchListItems: (): Promise<ListItem[]> => ipcRenderer.invoke('get-list-items'),
 })
+
+contextBridge.exposeInMainWorld('api', {
+  fetchListItems: (): Promise<ListItem[]> => ipcRenderer.invoke('get-list-items'),
+});

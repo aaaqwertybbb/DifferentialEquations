@@ -82,6 +82,60 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+.list-header {
+  padding: 16px;
+  background-color: #11111b;
+  border-bottom: 1px solid #313244;
+}
+
+.item-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto; /* Independent list scrolling */
+  flex-grow: 1;
+}
+
+.list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  border-bottom: 1px solid #313244;
+  transition: background-color 0.2s ease;
+}
+
+.list-item:hover {
+  background-color: #252538;
+  cursor: pointer;
+}
+
+.item-title {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.item-desc {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #a6adc8;
+}
+
+.delete-btn {
+  background-color: #f38ba8;
+  color: #11111b;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.delete-btn:hover {
+  background-color: #eba0b3;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;

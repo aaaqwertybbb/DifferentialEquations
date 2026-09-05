@@ -19,4 +19,8 @@ electron.contextBridge.exposeInMainWorld("ipcRenderer", {
   }
   // You can expose other APTs you need here.
   // ...
+  //fetchListItems: (): Promise<ListItem[]> => ipcRenderer.invoke('get-list-items'),
+});
+electron.contextBridge.exposeInMainWorld("api", {
+  fetchListItems: () => electron.ipcRenderer.invoke("get-list-items")
 });

@@ -1,7 +1,8 @@
-import { app, BrowserWindow } from 'electron'
+import { app, BrowserWindow, ipcMain } from 'electron'
 import { createRequire } from 'node:module'
 import { fileURLToPath } from 'node:url'
 import path from 'node:path'
+import { ListItem } from '../src/interface';
 
 const require = createRequire(import.meta.url)
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
@@ -45,6 +46,14 @@ function createWindow() {
     // win.loadFile('dist/index.html')
     win.loadFile(path.join(RENDERER_DIST, 'index.html'))
   }
+
+  ipcMain.handle('get-list-items', async (): Promise<ListItem[]> => {
+    // Simulate database or file system fetch
+    return [
+        { id: '1', title: 'First Task', description: 'Review the layout draft', timestamp: Date.now() },
+        { id: '2', title: 'Second Task', description: 'Optimize IPC payloads', timestamp: Date.now() },
+      ];
+  });
 }
 
 // Quit when all windows are closed, except on macOS. There, it's common

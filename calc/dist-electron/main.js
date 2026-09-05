@@ -1,4 +1,4 @@
-import { app, BrowserWindow } from "electron";
+import { app, BrowserWindow, ipcMain } from "electron";
 import { createRequire } from "node:module";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
@@ -25,6 +25,12 @@ function createWindow() {
   } else {
     win.loadFile(path.join(RENDERER_DIST, "index.html"));
   }
+  ipcMain.handle("get-list-items", async () => {
+    return [
+      { id: "1", title: "First Task", description: "Review the layout draft", timestamp: Date.now() },
+      { id: "2", title: "Second Task", description: "Optimize IPC payloads", timestamp: Date.now() }
+    ];
+  });
 }
 app.on("window-all-closed", () => {
   if (process.platform !== "darwin") {
