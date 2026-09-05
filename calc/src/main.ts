@@ -118,7 +118,7 @@ async function initList() {
     listContainer.addEventListener('scroll', () => {
       // requestAnimationFrame guarantees calculation matches screen refresh rate (no stutter)
       requestAnimationFrame(renderVirtualList);
-    });
+    }, { passive: true });
 
     // Handle window resizing dynamically
     window.addEventListener('resize', renderVirtualList);
