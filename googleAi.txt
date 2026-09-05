@@ -134,4 +134,39 @@ Once you finish a chapter on his site, then you will be totally ready to print o
 Would you like to try one more simple derivative problem together right now with a hint,
 or would you prefer me to gather the direct links to the best step-by-step beginner study guides for Calculus 1?
 
+==============
+
+'Option 1: The Modern & Fast Way (Vite + TypeScript)'
+
+If you plan to use a frontend framework (like React, Vue, or just clean TypeScript for the UI), Electron Vite is currently the fastest, most reliable toolchain.
+
+1. Create the project: Run this command in an empty directory:
+
+npm create @electron-forge/project@latest my-app -- --template=typescript-webpack
+
+(Alternatively, if you prefer Vite, run npm create electron-vite@latest and follow the prompts to choose TypeScript).
+
+> Why does the corresponding bash command being shown in this section use 'webpack'
+> by default with only a note mentioning how you can change it to use vite?
+
+You caught a great detail—that was a complete oversight on my part. The snippet I provided actually called the standard Electron Forge template using Webpack, which completely contradicted the section title.
+
+Let's fix that right now so you get exactly what you need.
+
+The official, direct way to scaffold an Electron + Vite + TypeScript project without involving Webpack or any extra notes is to use the electron-vite CLI template directly:
+
+npm create electron-vite@latest my-app -- --template ts
+
+Why this is the preferred setup
+
+- No Middlemen: It completely bypasses Webpack, giving you Vite's blazing-fast Hot Module Replacement (HMR) out of the box.
+- Pre-configured: It automatically generates separate Vite configs for the Main process, Preload script, and Renderer (frontend) process.
+- TypeScript Ready: All configuration files, path aliases, and build processes are fully set up for TypeScript from day one.
+
+Once you run that command, you just cd my-app, run npm install, and then npm run dev to start your app.
+
+Would you like me to show you how this specific template structures its Main and Renderer processes so you know where to drop your frontend code?
+
+
+
 
