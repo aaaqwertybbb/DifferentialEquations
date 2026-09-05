@@ -14,23 +14,12 @@ declare global {
   }
 }
 
+// 1. Config Variables
+const ITEM_HEIGHT = 72;   /* Must match the CSS height perfectly */
+const BUFFER_ITEMS = 5;   /* Extra elements above/below viewport to prevent flickering */
+
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
-  <div>
-    <a href="https://electron-vite.github.io" target="_blank">
-      <img src="${viteLogo}" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://www.typescriptlang.org/" target="_blank">
-      <img src="${typescriptLogo}" class="logo vanilla" alt="TypeScript logo" />
-    </a>
-    <h1>Vite + TypeScript</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-    <p class="read-the-docs">
-      Click on the Vite and TypeScript logos to learn more
-    </p>
-    <div id="list_id" class="list">
-    </div>
+  <div class="my-custom-layout-sandbox">
     <header class="list-header">
       <h1>My Tasks</h1>
     </header>
@@ -39,22 +28,28 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
   </div>
 `
 
-setupCounter(document.querySelector<HTMLButtonElement>('#counter')!)
-setupList(document.querySelector<HTMLDivElement>('#list_id')!);
+//setupCounter(document.querySelector<HTMLButtonElement>('#counter')!)
+//setupList(document.querySelector<HTMLDivElement>('#list_id')!);
 
 const listContainer = document.getElementById('list-container') as HTMLUListElement;
+
+// Create the phantom element to enforce scrollbar size
+const runway = document.createElement('div');
+runway.className = 'virtual-runway';
+listContainer.appendChild(runway);
+
+// Cache for our loaded dataset
+let allItems: ListItem[] = [];
 
 // Use contextBridge
 window.ipcRenderer.on('main-process-message', (_event, message) => {
   console.log(message)
 })
 
-// Component function to build an individual list item element
+// 3. Item Component Builder
 function createListItemElement(item: ListItem): HTMLLIElement {
   const li = document.createElement('li');
   li.className = 'list-item';
-  li.setAttribute('data-id', item.id);
-
   li.innerHTML = `
     <div class="item-content">
       <span class="item-title">${item.title}</span>
@@ -63,31 +58,73 @@ function createListItemElement(item: ListItem): HTMLLIElement {
     <button class="delete-btn">Complete</button>
   `;
 
-  // Attach event listeners directly to the DOM element if needed
-  li.querySelector('.delete-btn')?.addEventListener('click', () => {
-    li.remove(); 
-    // Pro-tip: You'd typically fire window.ipcRenderer.deleteItem(item.id) here to update the back-end
+  li.querySelector('.delete-btn')?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    // Remove from our memory array
+    allItems = allItems.filter(i => i.id !== item.id);
+    // Trigger structural refresh
+    renderVirtualList();
   });
 
   return li;
 }
 
-// Initializer function
+// 4. Core Rendering Engine
+function renderVirtualList() {
+  const scrollTop = listContainer.scrollTop;
+  const containerHeight = listContainer.clientHeight;
+  const totalItems = allItems.length;
+
+  // Set total height so the native scrollbar behaves correctly
+  runway.style.height = `${totalItems * ITEM_HEIGHT}px`;
+
+  // Calculate indices of items currently visible in viewport
+  let startIndex = Math.floor(scrollTop / ITEM_HEIGHT) - BUFFER_ITEMS;
+  let endIndex = Math.ceil((scrollTop + containerHeight) / ITEM_HEIGHT) + BUFFER_ITEMS;
+
+  // Clamp boundaries to valid array lengths
+  startIndex = Math.max(0, startIndex);
+  endIndex = Math.min(totalItems - 1, endIndex);
+
+  // Clear everything except the runway
+  const elementsToRemove = listContainer.querySelectorAll('.list-item');
+  elementsToRemove.forEach(el => el.remove());
+
+  // Render only the visible subset
+  const fragment = document.createDocumentFragment();
+  for (let i = startIndex; i <= endIndex; i++) {
+    const item = allItems[i];
+    if (!item) continue;
+
+    const itemEl = createListItemElement(item);
+    
+    // Position the item exactly where it belongs in the long timeline
+    const topPosition = i * ITEM_HEIGHT;
+    itemEl.style.transform = `translateY(${topPosition}px)`;
+    
+    fragment.appendChild(itemEl);
+  }
+  
+  listContainer.appendChild(fragment);
+}
+
+// 5. Setup Listeners and Initializers
 async function initList() {
   try {
-    const items = await window.api.fetchListItems();
+    // Fetch dataset from main process (mocking 50,000 items)
+    allItems = await window.api.fetchListItems();
     
-    // Clear loader/placeholder
-    listContainer.innerHTML = '';
-    
-    // Efficiently append elements using a DocumentFragment
-    const fragment = document.createDocumentFragment();
-    items.forEach(item => {
-      const itemEl = createListItemElement(item);
-      fragment.appendChild(itemEl);
+    // Listen for scrolling
+    listContainer.addEventListener('scroll', () => {
+      // requestAnimationFrame guarantees calculation matches screen refresh rate (no stutter)
+      requestAnimationFrame(renderVirtualList);
     });
-    
-    listContainer.appendChild(fragment);
+
+    // Handle window resizing dynamically
+    window.addEventListener('resize', renderVirtualList);
+
+    // Initial render pass
+    renderVirtualList();
   } catch (error) {
     console.error('Failed to load list items:', error);
   }

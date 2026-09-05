@@ -26,10 +26,16 @@ function createWindow() {
     win.loadFile(path.join(RENDERER_DIST, "index.html"));
   }
   ipcMain.handle("get-list-items", async () => {
-    return [
-      { id: "1", title: "First Task", description: "Review the layout draft", timestamp: Date.now() },
-      { id: "2", title: "Second Task", description: "Optimize IPC payloads", timestamp: Date.now() }
-    ];
+    const largeDataset = [];
+    for (let i = 1; i <= 5e4; i++) {
+      largeDataset.push({
+        id: i.toString(),
+        title: `Task Assignment #${i}`,
+        description: `Automated testing string for virtualized tracking row index ${i}.`,
+        timestamp: Date.now()
+      });
+    }
+    return largeDataset;
   });
 }
 app.on("window-all-closed", () => {

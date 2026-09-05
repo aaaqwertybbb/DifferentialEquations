@@ -48,11 +48,18 @@ function createWindow() {
   }
 
   ipcMain.handle('get-list-items', async (): Promise<ListItem[]> => {
-    // Simulate database or file system fetch
-    return [
-        { id: '1', title: 'First Task', description: 'Review the layout draft', timestamp: Date.now() },
-        { id: '2', title: 'Second Task', description: 'Optimize IPC payloads', timestamp: Date.now() },
-      ];
+    const largeDataset: ListItem[] = [];
+    
+    for (let i = 1; i <= 50000; i++) {
+      largeDataset.push({
+        id: i.toString(),
+        title: `Task Assignment #${i}`,
+        description: `Automated testing string for virtualized tracking row index ${i}.`,
+        timestamp: Date.now()
+      });
+    }
+    
+    return largeDataset;
   });
 }
 
