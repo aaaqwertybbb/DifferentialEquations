@@ -480,3 +480,9 @@ Now that your scrolling is fully optimized, how would you like to proceed?
 - Add a search/filter bar to see how instantly the virtual list screens 50,000 records
 - Implement keyboard navigation (using Up/Down arrows to change the selected item)
 - Style a custom overlay scrollbar that looks seamless on desktop
+
+> I'd like to breakout this logic into a "list component" that can accept a list of any kind.
+
+
+
+
