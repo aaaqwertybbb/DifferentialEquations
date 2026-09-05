@@ -443,3 +443,40 @@ Now that the rendering pipeline is highly optimized, how would you like to build
 - Implement a search filter input at the top that works instantly across all 50,000 rows
 - Add dynamic height support if your list item descriptions are going to be variable lengths
 - Expose a context menu (right-click) natively to interact with individual row items
+
+> Should the scroll event listener be passive?
+> 
+> // Listen for scrolling
+> listContainer.addEventListener('scroll', () => {
+>   // requestAnimationFrame guarantees calculation matches screen refresh rate (no stutter)
+>   requestAnimationFrame(renderVirtualList);
+> });
+
+Yes, making the scroll event listener passive is an excellent micro-optimization for your virtual scroll engine.
+
+To do this, pass { passive: true } as the third argument:
+
+```ts
+listContainer.addEventListener('scroll', () => {
+  requestAnimationFrame(renderVirtualList);
+}, { passive: true }); // Tells the browser not to wait for preventDefault()
+```
+
+Why this matters
+
+When a browser detects a scroll event, it normally pauses execution for a brief moment to check if any JavaScript
+function calls e.preventDefault() to stop the scroll action.
+
+By setting { passive: true }, you are telling Electron's Chromium engine: "I promise I will not cancel this scroll."
+This allows the native UI thread to scroll the page instantly and fluidly, completely decouples the hardware scroll layer
+from your JavaScript calculation, and completely eliminates scroll stuttering on lower-end machines.
+
+Combining it with requestAnimationFrame
+
+Your use of requestAnimationFrame is already great because it ensures the math only runs right before the screen paints.
+Adding passive: true completes the ultimate performance pairing for a high-rate scroll container.
+
+Now that your scrolling is fully optimized, how would you like to proceed?
+- Add a search/filter bar to see how instantly the virtual list screens 50,000 records
+- Implement keyboard navigation (using Up/Down arrows to change the selected item)
+- Style a custom overlay scrollbar that looks seamless on desktop
