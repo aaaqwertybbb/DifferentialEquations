@@ -481,17 +481,17 @@ Now that your scrolling is fully optimized, how would you like to proceed?
 - Implement keyboard navigation (using Up/Down arrows to change the selected item)
 - Style a custom overlay scrollbar that looks seamless on desktop
 
-> I'd like to breakout this logic into a "list component" that can accept a list of any kind.
+I'd like to breakout this logic into a "list component" that can accept a list of any kind.
 
-< To break this out into a reusable component that works with any data structure, you can leverage TypeScript Generics <T> along with
-< a render callback function. This mimics the design of modular UI components found in modern frameworks, but keeping it in pure vanilla TypeScript.
-< 
-< Here is how to create a highly flexible VirtualList class.
-< 
-< Step 1: The Generic Component Class
-< Create a new file src/components/VirtualList.ts. This class handles the math, DOM creation, and scroll performance automatically,
-< requiring only a configuration object.
-< ```ts
+To break this out into a reusable component that works with any data structure, you can leverage TypeScript Generics <T> along with
+a render callback function. This mimics the design of modular UI components found in modern frameworks, but keeping it in pure vanilla TypeScript.
+
+Here is how to create a highly flexible VirtualList class.
+
+Step 1: The Generic Component Class
+Create a new file src/components/VirtualList.ts. This class handles the math, DOM creation, and scroll performance automatically,
+requiring only a configuration object.
+```ts
 // src/components/VirtualList.ts
 
 // Configuration options needed to initialize the list
@@ -606,12 +606,12 @@ export class VirtualList<T> {
     this.container.innerHTML = '';
   }
 }
-< ```
-< 
-< Step 2: Consuming the Component (Any Kind of Data)
-< Now your src/renderer.ts becomes much simpler. You instantiate the VirtualList class and pass whatever unique row data shape you want.
-< Example A: Your Original Tasks List
-< ```ts// src/renderer.ts
+```
+
+Step 2: Consuming the Component (Any Kind of Data)
+Now your src/renderer.ts becomes much simpler. You instantiate the VirtualList class and pass whatever unique row data shape you want.
+Example A: Your Original Tasks List
+```ts// src/renderer.ts
 import { VirtualList } from './components/VirtualList';
 import { ListItem } from './interface';
 
@@ -668,8 +668,8 @@ const contactList = new VirtualList<Contact>({
     return li;
   }
 });
-< ```
-< 
-< Now that your logic is a generic, reusable abstraction, how should we progress?
-< - Add a click event callback prop to the VirtualList options so you can read item properties when an item is selected
-< - Implement a global text filter method onto the class to safely redraw data subsets
+```
+
+Now that your logic is a generic, reusable abstraction, how should we progress?
+- Add a click event callback prop to the VirtualList options so you can read item properties when an item is selected
+- Implement a global text filter method onto the class to safely redraw data subsets
